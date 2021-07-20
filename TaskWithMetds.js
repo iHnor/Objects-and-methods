@@ -18,7 +18,7 @@ class PrintTask {
             return '';
     }
 
-    checkDate(){
+    formatDate(){
         let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         return `${monthList[this.dueDate.getMonth()]} ${this.dueDate.getDate()}`
     }
@@ -31,7 +31,7 @@ class PrintTask {
     }
 
     toString(){
-        return (`${this.index}. [${this.checkDone()}] ${this.title} (${this.checkDate()}) ${this.checkDesc()}`);
+        return (`${this.index}. [${this.checkDone()}] ${this.title} (${this.formatDate()}) ${this.checkDesc()}`);
     }
 
     toggle(){

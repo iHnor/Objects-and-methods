@@ -8,7 +8,7 @@ var Task = {
 
 function printObj(){
     let done = checkDone(Task.done);
-    let dueDate = checkDate(Task.dueDate);
+    let dueDate = formatDate(Task.dueDate);
     let desc = checkDesc(Task.desc);
     console.log(`${Task.index}. [${done}] ${Task.title} (${dueDate}) ${desc}`);
 }
@@ -22,7 +22,7 @@ function checkDesc(desc) {
         return '';
 }
 
-function checkDate(date){
+function formatDate(date){
     let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return `${monthList[date.getMonth()]} ${date.getDate()}`
 }
