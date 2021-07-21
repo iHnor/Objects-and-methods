@@ -2,12 +2,13 @@ function createObj(){
     return new PrintTask();
 }
 class PrintTask {
+    // В конструктор должны передаваться значения
     constructor(){
         this.index =      1,
         this.title =      'Implement task output',
         this.desc =       'Some description',
         this.done =       true,
-        this.dueDate =    new Date('July 19')
+        this.dueDate =    new Date('July 19 10:43')
     }
 
     checkDesc() {
@@ -20,10 +21,11 @@ class PrintTask {
 
     formatDate(){
         let monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return `${monthList[this.dueDate.getMonth()]} ${this.dueDate.getDate()}`
+        return `${monthList[this.dueDate.getMonth()]} ${this.dueDate.getDate()} ${this.dueDate.getHours()}:${this.dueDate.getMinutes()}`
     }
 
     checkDone(){
+        return this.done ? 'x' : ' ';
         if (this.done)
             return 'x';
         else 
@@ -34,31 +36,53 @@ class PrintTask {
         return (`${this.index}. [${this.checkDone()}] ${this.title} (${this.formatDate()}) ${this.checkDesc()}`);
     }
 
-    toggle(){
-        if (this.done != false)
-            this.done = false;
-        else    
-            this.done = true;    
+    toggle() {
+        this.done =  !this.done;
+        // if (this.done != false)
+        //     this.done = false;
+        // else    
+        //     this.done = true;    
     }
 
     isOverdue(){
         let todayDate = new Date();
+ 
         if (this.dueDate.getMonth() < todayDate.getMonth()){      
             return true;
         }
             
         else if (this.dueDate.getDate() < todayDate.getDate())
             return true;
-
-            else 
-                return false;    
+            if (this.dueDate.getHours() < todayDate.getHours())
+                return true;
+            else if (this.dueDate.getMinutes() < todayDate.getMinutes())
+                return true;
+                else
+                    return false;    
     }
+
+    // postPone(time){
+    //     time = time.split(":");
+        
+    //     let minutes = (this.dueDate.getMinutes() + Number(time[2]))/60
+
+
+    //     let hours = ((this.dueDate.getHours() + Number(time[1]))/60).toFixed(1)
+
+    //     // console.log(minutes);
+    //     console.log(Math.floor(minutes));
+    // }
+
 }
-var note1 = createObj();
 
-var OverdueRezult = note1.isOverdue(); 
 
-console.log(note1.toString());
+var note = createObj();
 
-note1.toggle();
-console.log(note1.toString());
+var OverdueRezult = note.isOverdue(); 
+
+console.log(note.toString());
+
+note.toggle();
+console.log(note.toString());
+
+// note.postPone("1:30:20")
